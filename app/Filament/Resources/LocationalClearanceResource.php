@@ -50,7 +50,9 @@ class LocationalClearanceResource extends Resource
                                 ->pluck('name', 'id')
                             )
                             ->afterStateUpdated(fn(Set $set) => $set('province_id', null))
+                            ->afterStateUpdated(fn(Set $set) => $set('city_municipalities_id', null))
                         ,
+
                         Select::make('province_id')
                             ->label('Province')
                             ->preload()
@@ -58,12 +60,12 @@ class LocationalClearanceResource extends Resource
                             ->options(fn(Get $get): Collection => Province::query()
                                 ->where('region_id', $get('region_id'))
                                 ->orderBy('name', 'asc')
-                                ->pluck('name', 'code'))
+                                ->pluck('name', 'id'))
                             ->searchable()
-                            ->afterStateUpdated(function (Set $set, Get $get) {
+                            ->afterStateUpdated(function (Set $set) {
                                 $set('city_municipalities_id', null);
                             })
-                            ->default('580')
+                            ->default('27')
                         ,
 
                         Select::make('city_municipalities_id')
@@ -73,7 +75,7 @@ class LocationalClearanceResource extends Resource
                             ->options(fn(Get $get): Collection => CityMunicipality::query()
                                 ->where('province_id', $get('province_id'))
                                 ->orderBy('name', 'asc')
-                                ->pluck('name', 'name'))
+                                ->pluck('name', 'id'))
                             ->searchable()
                         ,
 

@@ -16,7 +16,7 @@ class ImportCsvSeederPSGC extends Seeder
     public function run(): void
     {
         //
-        $filePath = storage_path('app/PSGC.csv');
+        $filePath = storage_path('app/PSGC_v2.csv');
 
         if (!file_exists($filePath) || !is_readable($filePath)) {
             echo "CSV file not found or is not readable.";
@@ -38,6 +38,7 @@ class ImportCsvSeederPSGC extends Seeder
             }
             fclose($handle);
         }
+
 
         //         Insert the data into the database
         foreach ($data as $row) {
@@ -74,13 +75,13 @@ class ImportCsvSeederPSGC extends Seeder
                 if ($region) {
 
                     // Debugging: Output the values being inserted
-                    echo "Inserting: " . json_encode([
-                            'name' => $row['Name'],
-                            'population' => str_replace(',', '', $row['Population']),
-                            'code' => $row['Province_Code'],
-                            'PSGC_Code' => $row['PSGC_Code'],
-                            'region_id' => $region->id,
-                        ]) . "\n";
+//                    echo "Inserting: " . json_encode([
+//                            'name' => $row['Name'],
+//                            'population' => str_replace(',', '', $row['Population']),
+//                            'code' => $row['Province_Code'],
+//                            'PSGC_Code' => $row['PSGC_Code'],
+//                            'region_id' => $region->id,
+//                        ]) . "\n";
 
                     DB::table('Provinces')->insert([
                         'name' => $row['Name'],
@@ -102,13 +103,13 @@ class ImportCsvSeederPSGC extends Seeder
 
                 if ($province) {
                     // Debugging: Output the values being inserted
-                    echo "Inserting: " . json_encode([
-                            'name' => $row['Name'],
-                            'population' => str_replace(',', '', $row['Population']),
-                            'code' => $row['CityMunicipality_Code'],
-                            'PSGC_Code' => $row['PSGC_Code'],
-                            'province_id' => $province->id,
-                        ]) . "\n";
+//                    echo "Inserting: " . json_encode([
+//                            'name' => $row['Name'],
+//                            'population' => str_replace(',', '', $row['Population']),
+//                            'code' => $row['CityMunicipality_Code'],
+//                            'PSGC_Code' => $row['PSGC_Code'],
+//                            'province_id' => $province->id,
+//                        ]) . "\n";
 
                     DB::table('city_municipalities')->insert([
                         'name' => $row['Name'],
