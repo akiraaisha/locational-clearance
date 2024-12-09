@@ -1,2 +1,6 @@
 *
+!public/
+!private/
+!PSGC.csv
+!PSGC_v2.csv
 !.gitignore
