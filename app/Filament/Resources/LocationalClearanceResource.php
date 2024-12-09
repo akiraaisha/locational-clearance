@@ -9,7 +9,6 @@ use App\Models\CityMunicipality;
 use App\Models\LocationalClearance;
 use App\Models\Province;
 use App\Models\Region;
-use Faker\Provider\Text;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -79,6 +78,8 @@ class LocationalClearanceResource extends Resource
                             ->searchable()
                         ,
 
+
+
                         TextInput::make('PSGC_Code')
                             ->label('PSGC Code')
                             ->disabled()
@@ -103,7 +104,6 @@ class LocationalClearanceResource extends Resource
                                 ->pluck('name', 'id')),
                     ])
                     ->columns(3),
-
             ]);
     }
 

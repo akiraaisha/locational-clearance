@@ -28,8 +28,7 @@ class LocationalClearance extends Model
         'street_name',
         'subdivision_id',
         'barangay_id',
-        'city_municipalities_id',
-        'barangay_id',
+        'region_id',
         'city_municipalities_id',
         'zip_code'
     ];
@@ -42,6 +41,11 @@ class LocationalClearance extends Model
     public function region(): BelongsTo
     {
         return $this->belongsTo(Region::class);
+    }
+
+    public function CityMunicipality(): BelongsTo
+    {
+        return $this->belongsTo(CityMunicipality::class);
     }
 
 }
